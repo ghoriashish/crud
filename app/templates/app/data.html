@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'edit'%}" method="POST">
+    <table>    
+        
+            <tr>
+                <th>id</th>
+                <th>fname</th>
+                <th>lname</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            {% if key %}
+            {% for i  in key %}
+                <tr>
+                    
+                   <td>{{i.id}}</td>
+                   <td>{{i.fname}}</td>
+                   <td>{{i.lname}}</td>
+                
+                   <td>
+                        <form action="{% url 'edit'%}" method="post">
+                        {% csrf_token %}
+                    
+                            <input type="hidden" name="e" value="{{i.id}}">
+                            <input type="submit" value="edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'delete' %}" method="post">
+                        {% csrf_token %}
+                    
+                            <input type="hidden" name="d" value="{{i.id}}">
+                            <input type="submit" value="delete">
+                         </form>
+                    </td>
+
+                {% endfor %}
+            {% endif %}
+
+                </tr>
+    </table>
+
+    </form>   
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'change'%}" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>id</td>
+                <td>fname</td>
+                <td>lname</td>
+            {% if key1 %}
+            {% for i  in key1 %}
+                <tr>
+                    
+                   <td>{{i.id}}</td>
+                   <td>{{i.fname}}</td>
+                   <td>{{i.lname}}</td>
+                </tr>
+            </tr>    
+        </table>
+        <table>
+            <tr><td>edit:</td></tr>
+            <tr>
+                    <tr>
+                         <td><input type="hidden" name="i" value="{{i.id}}"></td>
+                    </tr>
+                    <td>fname</td>
+                    <td><input type="text" name="fname"></td>
+
+            </tr>
+            <tr>
+                <td>lname</td>
+                <td><input type="text" name="lname"></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit"  value="save"/>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </form>
+</body>
+</html>
